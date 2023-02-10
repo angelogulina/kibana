@@ -54,14 +54,12 @@ import {
 } from '@elastic/eui';
 import { Filter, IFieldSubType } from '@kbn/es-query';
 import { BrowserFields } from '@kbn/rule-registry-plugin/common';
-// eslint-disable-next-line @kbn/imports/no_boundary_crossing
-import { TimelineNonEcsData } from '@kbn/triggers-actions-ui-plugin/public/application/sections/alerts_table/bulk_actions/components/toolbar';
 import { ReactNode } from 'react';
 
 export type ColumnHeaderType = 'not-filtered' | 'text-filter';
 
 import type { EcsSecurityExtension as Ecs } from '@kbn/securitysolution-ecs';
-import { RowRenderer, TimelineItem } from '@kbn/timelines-plugin/common';
+import { RowRenderer, TimelineItem, TimelineNonEcsData } from '@kbn/timelines-plugin/common';
 
 /** Uniquely identifies a column */
 export type ColumnId = string;

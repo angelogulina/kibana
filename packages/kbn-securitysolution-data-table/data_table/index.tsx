@@ -426,7 +426,7 @@ export const DataTableComponent = React.memo<DataTableProps>(
         <EuiDataGridContainer hideLastPage={totalItems > ES_LIMIT_COUNT}>
           <EuiDataGrid
             id={'body-data-grid'}
-            data-test-subj="body-data-grid-migrated"
+            data-test-subj="body-data-grid"
             aria-label={DATA_TABLE_ARIA_LABEL}
             columns={isEventRenderedView ? columnHeaders : columnsWithCellActions}
             columnVisibility={{ visibleColumns, setVisibleColumns: onSetVisibleColumns }}

@@ -8,7 +8,7 @@
 
 import { shallowEqual, useSelector } from 'react-redux';
 import deepEqual from 'fast-deep-equal';
-import { DataTableState } from '../store/data_table/types';
+import { DataTableState } from '../store/types';
 
 export type TypedUseSelectorHook = <TSelected, TState = DataTableState>(
   selector: (state: TState) => TSelected,

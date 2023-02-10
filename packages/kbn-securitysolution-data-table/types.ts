@@ -61,7 +61,7 @@ import { ReactNode } from 'react';
 export type ColumnHeaderType = 'not-filtered' | 'text-filter';
 
 import type { EcsSecurityExtension as Ecs } from '@kbn/securitysolution-ecs';
-import { RowRenderer } from '@kbn/timelines-plugin/common';
+import { RowRenderer, TimelineItem } from '@kbn/timelines-plugin/common';
 
 /** Uniquely identifies a column */
 export type ColumnId = string;
@@ -178,3 +178,30 @@ export type CellValueElementProps = EuiDataGridCellValueElementProps & {
   closeCellPopover?: () => void;
   enableActions?: boolean;
 };
+
+export interface BulkActionsObjectProp {
+  alertStatusActions?: boolean;
+  onAlertStatusActionSuccess?: OnUpdateAlertStatusSuccess;
+  onAlertStatusActionFailure?: OnUpdateAlertStatusError;
+  customBulkActions?: CustomBulkAction[];
+}
+
+export type OnUpdateAlertStatusSuccess = (
+  updated: number,
+  conflicts: number,
+  status: AlertWorkflowStatus
+) => void;
+export type OnUpdateAlertStatusError = (status: AlertWorkflowStatus, error: Error) => void;
+
+export type BulkActionsProp = boolean | BulkActionsObjectProp;
+
+export interface CustomBulkAction {
+  key: string;
+  label: string;
+  disableOnQuery?: boolean;
+  disabledLabel?: string;
+  onClick: (items?: TimelineItem[]) => void;
+  ['data-test-subj']?: string;
+}
+
+export type AlertWorkflowStatus = 'open' | 'closed' | 'acknowledged';

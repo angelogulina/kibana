@@ -29,7 +29,7 @@ import type { EuiTheme } from '@kbn/kibana-react-plugin/common';
 import type { FieldBrowserOptions } from '@kbn/triggers-actions-ui-plugin/public';
 import { i18n } from '@kbn/i18n';
 import { BrowserFields } from '@kbn/timelines-plugin/common';
-import type { DataTableCellAction } from '../types';
+import type { BulkActionsProp, DataTableCellAction } from '../types';
 import type { CellValueElementProps, ColumnHeaderOptions, RowRenderer } from '../types';
 
 import { getColumnHeader, getColumnHeaders } from './column_headers/helpers';
@@ -41,10 +41,9 @@ import {
 } from './helpers';
 
 import { UnitCount } from '../toolbar/unit';
-import type { BulkActionsProp } from '../toolbar/bulk_actions/types';
 
-import { dataTableActions, dataTableSelectors } from '../store/data_table';
-import { tableDefaults } from '../store/data_table/defaults';
+import { dataTableActions, dataTableSelectors } from '../store';
+import { tableDefaults } from '../store/defaults';
 
 import { REMOVE_COLUMN } from './column_headers/translations';
 import { getPageRowIndex } from './pagination';
@@ -247,7 +246,7 @@ export const DataTableComponent = React.memo<DataTableProps>(
       direction: 'asc' | 'desc';
     }> = useMemo(
       () =>
-        sort.map((x) => ({
+        sort.map((x: any) => ({
           id: x.columnId,
           direction: mapSortDirectionToDirection(x.sortDirection),
         })),
@@ -427,7 +426,7 @@ export const DataTableComponent = React.memo<DataTableProps>(
         <EuiDataGridContainer hideLastPage={totalItems > ES_LIMIT_COUNT}>
           <EuiDataGrid
             id={'body-data-grid'}
-            data-test-subj="body-data-grid"
+            data-test-subj="body-data-grid-migrated"
             aria-label={DATA_TABLE_ARIA_LABEL}
             columns={isEventRenderedView ? columnHeaders : columnsWithCellActions}
             columnVisibility={{ visibleColumns, setVisibleColumns: onSetVisibleColumns }}

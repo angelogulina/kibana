@@ -5,6 +5,7 @@
  * 2.0.
  */
 
+import { DataTableComponent } from '@kbn/securitysolution-data-table';
 import { Storage } from '@kbn/kibana-utils-plugin/public';
 import { AlertConsumers } from '@kbn/rule-data-utils';
 import React, { useRef, useCallback, useMemo, useEffect, useState, useContext } from 'react';
@@ -56,7 +57,6 @@ import {
 import { getDefaultViewSelection, getCombinedFilterQuery } from './helpers';
 import { useTimelineEvents } from './use_timelines_events';
 import { TableContext, EmptyTable, TableLoading } from './shared';
-import { DataTableComponent } from '../data_table';
 import { FIELDS_WITHOUT_CELL_ACTIONS } from '../../lib/cell_actions/constants';
 import type { AlertWorkflowStatus } from '../../types';
 import { useQueryInspector } from '../page/manage_query';
@@ -153,7 +153,11 @@ const StatefulEventsViewerComponent: React.FC<EventsViewerProps & PropsFromRedux
     } = defaultModel,
   } = useSelector((state: State) => eventsViewerSelector(state, tableId));
 
-  const { uiSettings, data } = useKibana().services;
+  const {
+    uiSettings,
+    data,
+    triggersActionsUi: { getFieldBrowser },
+  } = useKibana().services;
 
   const [tableView, setTableView] = useState<ViewSelection>(
     getDefaultViewSelection({
@@ -568,6 +572,9 @@ const StatefulEventsViewerComponent: React.FC<EventsViewerProps & PropsFromRedux
                       <ScrollableFlexItem grow={1}>
                         <StatefulEventContext.Provider value={activeStatefulEventContext}>
                           <DataTableComponent
+                            // TODO add concrete type
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            getFieldBrowser={getFieldBrowser as any}
                             additionalControls={alertBulkActions}
                             unitCountText={unitCountText}
                             browserFields={browserFields}

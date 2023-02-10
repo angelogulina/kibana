@@ -1,23 +1,28 @@
 /*
  * Copyright Elasticsearch B.V. and/or licensed to Elasticsearch B.V. under one
  * or more contributor license agreements. Licensed under the Elastic License
- * 2.0; you may not use this file except in compliance with the Elastic License
- * 2.0.
+ * 2.0 and the Server Side Public License, v 1; you may not use this file except
+ * in compliance with, at your election, the Elastic License 2.0 or the Server
+ * Side Public License, v 1.
  */
 
 import { omit, union } from 'lodash/fp';
 
 import { isEmpty } from 'lodash';
 import type { EuiDataGridColumn } from '@elastic/eui';
-import type { SessionViewConfig } from '../../../../common/types/session_view';
-import type { ExpandedDetail, ExpandedDetailType } from '../../../../common/types/detail_panel';
-import type { ColumnHeaderOptions, SortColumnTable } from '../../../../common/types';
+import type { ColumnHeaderOptions, SortColumnTable } from '../types';
 import type { TableToggleDetailPanel } from './actions';
-import type { DataTablePersistInput, TableById } from './types';
+import type {
+  DataTablePersistInput,
+  ExpandedDetail,
+  ExpandedDetailType,
+  SessionViewConfig,
+  TableById,
+} from './types';
 import type { DataTableModelSettings } from './model';
 
 import { getDataTableManageDefaults, tableDefaults } from './defaults';
-import { DEFAULT_TABLE_COLUMN_MIN_WIDTH } from '../../components/data_table/constants';
+import { DEFAULT_TABLE_COLUMN_MIN_WIDTH } from '../data_table/constants';
 
 export const isNotNull = <T>(value: T | null): value is T => value !== null;
 export type Maybe<T> = T | null;

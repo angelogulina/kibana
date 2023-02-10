@@ -1,16 +1,20 @@
 /*
  * Copyright Elasticsearch B.V. and/or licensed to Elasticsearch B.V. under one
  * or more contributor license agreements. Licensed under the Elastic License
- * 2.0; you may not use this file except in compliance with the Elastic License
- * 2.0.
+ * 2.0 and the Server Side Public License, v 1; you may not use this file except
+ * in compliance with, at your election, the Elastic License 2.0 or the Server
+ * Side Public License, v 1.
  */
 
+import { TimelineNonEcsData } from '@kbn/timelines-plugin/common';
 import actionCreatorFactory from 'typescript-fsa';
-import type { SessionViewConfig } from '../../../../common/types/session_view';
-import type { ExpandedDetailType } from '../../../../common/types/detail_panel';
-import type { TimelineNonEcsData } from '../../../../common/search_strategy';
-import type { ColumnHeaderOptions, SortColumnTable } from '../../../../common/types';
-import type { InitialyzeDataTableSettings, DataTablePersistInput } from './types';
+import type { ColumnHeaderOptions, SortColumnTable } from '../types';
+import type {
+  InitialyzeDataTableSettings,
+  DataTablePersistInput,
+  SessionViewConfig,
+  ExpandedDetailType,
+} from './types';
 
 const actionCreator = actionCreatorFactory('x-pack/security_solution/data-table');
 

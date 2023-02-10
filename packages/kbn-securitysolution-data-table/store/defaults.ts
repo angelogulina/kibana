@@ -6,11 +6,11 @@
  * Side Public License, v 1.
  */
 
-import type { ColumnHeaderOptions, ColumnHeaderType } from '../../types';
+import type { ColumnHeaderOptions, ColumnHeaderType } from '../types';
 import {
   DEFAULT_TABLE_COLUMN_MIN_WIDTH,
   DEFAULT_TABLE_DATE_COLUMN_MIN_WIDTH,
-} from '../../constants';
+} from '../data_table/constants';
 import type { SubsetDataTableModel } from './model';
 import * as i18n from './translations';
 

@@ -6,6 +6,8 @@
  * Side Public License, v 1.
  */
 
-export function foo() {
-  return 'hello world';
-}
+export type { DataTableProps } from './data_table';
+
+export { DataTableComponent } from './data_table';
+
+export { dataTableReducer } from './store/reducer';

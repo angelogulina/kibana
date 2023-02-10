@@ -8,6 +8,7 @@
 import type { AnyAction, Reducer } from 'redux';
 import { combineReducers } from 'redux';
 
+import { dataTableReducer } from '@kbn/securitysolution-data-table';
 import { appReducer, initialAppState } from './app';
 import { dragAndDropReducer, initialDragAndDropState } from './drag_and_drop';
 import { createInitialInputsState, inputsReducer } from './inputs';
@@ -28,7 +29,6 @@ import type { ExperimentalFeatures } from '../../../common/experimental_features
 import { getScopePatternListSelection } from './sourcerer/helpers';
 import { globalUrlParamReducer, initialGlobalUrlParam } from './global_url_param';
 import type { DataTableState } from './data_table/types';
-import { dataTableReducer } from './data_table/reducer';
 
 export type SubPluginsInitReducer = HostsPluginReducer &
   UsersPluginReducer &

@@ -1,8 +1,9 @@
 /*
  * Copyright Elasticsearch B.V. and/or licensed to Elasticsearch B.V. under one
  * or more contributor license agreements. Licensed under the Elastic License
- * 2.0; you may not use this file except in compliance with the Elastic License
- * 2.0.
+ * 2.0 and the Server Side Public License, v 1; you may not use this file except
+ * in compliance with, at your election, the Elastic License 2.0 or the Server
+ * Side Public License, v 1.
  */
 
 import * as runtimeTypes from 'io-ts';
@@ -19,8 +20,6 @@ export interface SortColumnTable {
   esTypes?: string[];
   sortDirection: SortDirectionTable;
 }
-
-export type { TableById } from '../../../public/common/store/data_table/types';
 
 export enum TableId {
   usersPageEvents = 'users-page-events',
@@ -48,23 +47,21 @@ const TableIdLiteralRt = runtimeTypes.union([
 ]);
 export type TableIdLiteral = runtimeTypes.TypeOf<typeof TableIdLiteralRt>;
 
-/*
- * Copyright Elasticsearch B.V. and/or licensed to Elasticsearch B.V. under one
- * or more contributor license agreements. Licensed under the Elastic License
- * 2.0; you may not use this file except in compliance with the Elastic License
- * 2.0.
- */
-
-import { EuiDataGridColumn, EuiDataGridColumnCellActionProps } from '@elastic/eui';
-import { IFieldSubType } from '@kbn/es-query';
+import {
+  EuiDataGridCellValueElementProps,
+  EuiDataGridColumn,
+  EuiDataGridColumnCellActionProps,
+} from '@elastic/eui';
+import { Filter, IFieldSubType } from '@kbn/es-query';
 import { BrowserFields } from '@kbn/rule-registry-plugin/common';
+// eslint-disable-next-line @kbn/imports/no_boundary_crossing
 import { TimelineNonEcsData } from '@kbn/triggers-actions-ui-plugin/public/application/sections/alerts_table/bulk_actions/components/toolbar';
 import { ReactNode } from 'react';
-import type { SortDirectionTable as SortDirection } from '../types';
 
 export type ColumnHeaderType = 'not-filtered' | 'text-filter';
 
 import type { EcsSecurityExtension as Ecs } from '@kbn/securitysolution-ecs';
+import { RowRenderer } from '@kbn/timelines-plugin/common';
 
 /** Uniquely identifies a column */
 export type ColumnId = string;
@@ -158,3 +155,26 @@ export type ColumnHeaderOptions = Pick<
 export type OnUpdateColumns = (columns: ColumnHeaderOptions[]) => void;
 
 export type SortDirection = 'none' | 'asc' | 'desc' | Direction;
+
+export type { RowRenderer } from '@kbn/timelines-plugin/common';
+
+/** The following props are provided to the function called by `renderCellValue` */
+export type CellValueElementProps = EuiDataGridCellValueElementProps & {
+  asPlainText?: boolean;
+  browserFields?: BrowserFields;
+  data: TimelineNonEcsData[];
+  ecsData?: Ecs;
+  eventId: string; // _id
+  globalFilters?: Filter[];
+  header: ColumnHeaderOptions;
+  isDraggable: boolean;
+  isTimeline?: boolean; // Default cell renderer is used for both the alert table and timeline. This allows us to cheaply separate concerns
+  linkValues: string[] | undefined;
+  rowRenderers?: RowRenderer[];
+  setFlyoutAlert?: (data: any) => void;
+  scopeId: string;
+  truncate?: boolean;
+  key?: string;
+  closeCellPopover?: () => void;
+  enableActions?: boolean;
+};
